@@ -29,10 +29,12 @@ $(function() {
 });
 
 function callback( json ) {
-    console.debug( json.length ); 
-//    console.debug (json ); 
-//    console.debug( json.items ); 
-
+    console.debug( json.length );
+    $('#result').empty();
+    $.each(json, function (i,n) { 
+	$('<img src="http://susy.physics.lsa.umich.edu:8090/mac/data/xojstore/'  + n.uuid + '/latest/page/1.svg"/> ').appendTo('#result') ;
+    } )
+ 
 }
 
 
