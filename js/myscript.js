@@ -23,18 +23,29 @@ $(function() {
         console.debug(url);
 
         var params = { format : 'json' } 
-        $.getJSON ( url, params, callback) ; 
+        $.getJSON ( url, params, function(json) { callback(json,numpages);});  
         
     } ); 
 });
 
-function callback( json ) {
-    console.debug( json.length );
+function callback( json, numpages ) {
     $('#result').empty();
-    $.each(json, function (i,n) { 
-	$('<img src="http://susy.physics.lsa.umich.edu:8090/mac/data/xojstore/'  + n.uuid + '/latest/page/1.svg"/> ').appendTo('#result') ;
+    $.each(json, function (i,n) {
+        var str  = "" ;
+        str += '<hr/> ' + n.uuid + ': ' + n.creationtime + ' : <a href="http://susy.physics.lsa.umich.edu:8090/mac/data/xojstore/' + n.uuid + '/latest.xoj"> '+ n.name + ' </a><br/>'  ; 
+        for(var i=1 ; i <=n.numofpages; i++ ) { 
+            str += makeimg(n.uuid,numpages,i) ;
+	}  
+        $(str).appendTo('#result'); 
     } )
+
+    
  
 }
 
-
+function makeimg( uuid, numpages, n ) {
+    var str = '<img src="http://susy.physics.lsa.umich.edu:8090/mac/data/xojstore/' 
+	      + uuid + '/latest/page/' + n + '.svg" width=' 
+        + (100 / numpages )  + '% />';
+    return str ; 
+}
