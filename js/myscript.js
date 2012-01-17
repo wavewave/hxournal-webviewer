@@ -32,7 +32,7 @@ function callback( json, numpages ) {
     $('#result').empty();
     $.each(json, function (i,n) {
         var str  = "" ;
-        str += '<hr/> ' + n.uuid + ': ' + n.creationtime + ' : <a href="http://susy.physics.lsa.umich.edu:8090/mac/data/xojstore/' + n.uuid + '/latest.xoj"> '+ n.name + ' </a><br/>'  ; 
+        str += '<hr/> <a href="http://susy.physics.lsa.umich.edu:8090/idmap/hxournalidmap/' + n.uuid + '"> ' + n.uuid + ' </a> : ' + n.creationtime + ' : <a href="http://susy.physics.lsa.umich.edu:8090/mac/data/xojstore/' + n.uuid + '/latest.xoj"> '+ n.name + ' </a><br/>'  ; 
         for(var i=1 ; i <=n.numofpages; i++ ) { 
             str += makeimg(n.uuid,numpages,i) ;
 	}  
